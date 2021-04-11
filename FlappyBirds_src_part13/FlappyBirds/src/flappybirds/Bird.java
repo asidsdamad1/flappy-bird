@@ -5,9 +5,11 @@
  */
 package flappybirds;
 
-import com.sun.javafx.geom.RectBounds;
-import java.awt.Rectangle;
 import pkg2dgamesframework.Objects;
+import pkg2dgamesframework.SoundPlayer;
+
+import java.awt.*;
+import java.io.File;
 
 /**
  *
@@ -22,10 +24,16 @@ public class Bird extends Objects{
     private Rectangle rect;
     
     private boolean isLive = true;
-    
+
+    public SoundPlayer flapSound, contactSound, getPointSound;
+
     public Bird(int x, int y, int w, int h){
         super(x, y, w, h);  
         rect = new Rectangle(x, y, w, h);
+
+        flapSound = new SoundPlayer(new File("Assets/fap.wav"));
+        contactSound = new SoundPlayer(new File("Assets/fall.wav"));
+        getPointSound = new SoundPlayer(new File("Assets/getpoint.wav"));
     }
     
     public void setLive(boolean b){
@@ -56,6 +64,7 @@ public class Bird extends Objects{
     
     public void fly(){
         vt = -3;
+        flapSound.play();
     }
     
     

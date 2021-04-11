@@ -96,6 +96,7 @@ public class FlappyBirds extends GameScreen{
             
             for(int i = 0;i<ChimneyGroup.SIZE;i++){
                 if(bird.getRect().intersects(chimneyGroup.getChimney(i).getRect())){
+                    if(bird.getLive())  bird.contactSound.play();
                     bird.setLive(false);
                     System.out.println("Set live = false");
                 }
@@ -107,12 +108,17 @@ public class FlappyBirds extends GameScreen{
                 if(bird.getPosX() > chimneyGroup.getChimney(i).getPosX() && !chimneyGroup.getChimney(i).getIsBehindBird()
                         && i%2==0){
                     Point ++;
+                    bird.getPointSound.play();
                     chimneyGroup.getChimney(i).setIsBehindBird(true);
                 }
                     
             }
             
-            if(bird.getPosY() + bird.getH() > ground.getYGround()) CurrentScreen = GAMEOVER_SCREEN;
+            if(bird.getPosY() + bird.getH() > ground.getYGround()) {
+                if(bird.getLive()) bird.contactSound.play();
+                CurrentScreen = GAMEOVER_SCREEN;
+
+            }
             
         }else{
             
