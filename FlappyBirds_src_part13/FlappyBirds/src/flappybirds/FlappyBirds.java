@@ -69,6 +69,7 @@ public class FlappyBirds extends GameScreen{
     
     
     public static void main(String[] args) {
+
         new FlappyBirds();
     }
     
